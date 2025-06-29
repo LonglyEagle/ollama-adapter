@@ -1,0 +1,153 @@
+{
+  "models": {
+    "dashscope/qwen-turbo": {
+      "provider": "dashscope",
+      "family": "qwen2",
+      "families": ["qwen2"],
+      "parameter_size": "7.6B",
+      "quantization": "Q4_K_M",
+      "format": "gguf",
+      "description": "阿里百炼通义千问Turbo模型",
+      "context_length": 8192,
+      "capabilities": ["text", "chat", "chinese"]
+    },
+    "dashscope/qwen-plus": {
+      "provider": "dashscope",
+      "family": "qwen2",
+      "families": ["qwen2"],
+      "parameter_size": "14B",
+      "quantization": "Q4_K_M",
+      "format": "gguf",
+      "description": "阿里百炼通义千问Plus模型",
+      "context_length": 32768,
+      "capabilities": ["text", "chat", "chinese"]
+    },
+    "dashscope/qwen-max": {
+      "provider": "dashscope",
+      "family": "qwen2",
+      "families": ["qwen2"],
+      "parameter_size": "72B",
+      "quantization": "Q4_K_M",
+      "format": "gguf",
+      "description": "阿里百炼通义千问Max模型",
+      "context_length": 32768,
+      "capabilities": ["text", "chat", "chinese"]
+    },
+    "deepseek/deepseek-chat": {
+      "provider": "deepseek",
+      "family": "deepseek",
+      "families": ["deepseek"],
+      "parameter_size": "67B",
+      "quantization": "Q4_K_M",
+      "format": "gguf",
+      "description": "DeepSeek Chat模型",
+      "context_length": 32768,
+      "capabilities": ["text", "chat", "chinese"]
+    },
+    "deepseek/deepseek-coder": {
+      "provider": "deepseek",
+      "family": "deepseek",
+      "families": ["deepseek"],
+      "parameter_size": "33B",
+      "quantization": "Q4_K_M",
+      "format": "gguf",
+      "description": "DeepSeek Coder模型",
+      "context_length": 16384,
+      "capabilities": ["text", "chat", "code", "chinese"]
+    },
+    "siliconflow/Yi-34B-Chat": {
+      "provider": "siliconflow",
+      "family": "yi",
+      "families": ["yi"],
+      "parameter_size": "34B",
+      "quantization": "fp16",
+      "format": "transformer",
+      "description": "硅基流动 Yi-34B 聊天模型",
+      "context_length": 4096,
+      "capabilities": ["text", "chat", "chinese"]
+    },
+    "siliconflow/Meta-Llama-3-8B-Instruct": {
+      "provider": "siliconflow",
+      "family": "llama",
+      "families": ["llama"],
+      "parameter_size": "8B",
+      "quantization": "fp16",
+      "format": "transformer",
+      "description": "硅基流动 Meta Llama 3 8B 指令模型",
+      "context_length": 8192,
+      "capabilities": ["text", "chat", "instruction"]
+    },
+    "siliconflow/text-embedding-ada-002": {
+      "provider": "siliconflow",
+      "family": "embedding",
+      "families": ["embedding"],
+      "parameter_size": "1.5B",
+      "quantization": "fp16",
+      "format": "transformer",
+      "description": "硅基流动文本嵌入模型",
+      "context_length": 8192,
+      "capabilities": ["embedding"]
+    },
+    "volcengine/doubao-lite-4k": {
+      "provider": "volcengine",
+      "family": "doubao",
+      "families": ["doubao"],
+      "parameter_size": "7B",
+      "quantization": "Q4_K_M",
+      "format": "gguf",
+      "description": "火山引擎豆包Lite 4K模型",
+      "context_length": 4096,
+      "capabilities": ["text", "chat", "chinese"]
+    },
+    "volcengine/doubao-pro-4k": {
+      "provider": "volcengine",
+      "family": "doubao",
+      "families": ["doubao"],
+      "parameter_size": "32B",
+      "quantization": "fp16",
+      "format": "transformer",
+      "description": "火山引擎豆包 Pro 4K 模型",
+      "context_length": 4096,
+      "capabilities": ["text", "chat", "chinese"]
+    },
+    "dashscope/text-embedding-v1": {
+      "provider": "dashscope",
+      "family": "embedding",
+      "families": ["embedding"],
+      "parameter_size": "1B",
+      "quantization": "fp16",
+      "format": "transformer",
+      "description": "通义千问文本嵌入模型",
+      "context_length": 2048,
+      "capabilities": ["embedding"]
+    },
+    "deepseek/text-embedding-ada-002": {
+      "provider": "deepseek",
+      "family": "embedding",
+      "families": ["embedding"],
+      "parameter_size": "1.5B",
+      "quantization": "fp16",
+      "format": "transformer",
+      "description": "DeepSeek 文本嵌入模型",
+      "context_length": 8192,
+      "capabilities": ["embedding"]
+    },
+    "volcengine/doubao-embedding": {
+      "provider": "volcengine",
+      "family": "embedding",
+      "families": ["embedding"],
+      "parameter_size": "1B",
+      "quantization": "fp16",
+      "format": "transformer",
+      "description": "火山引擎豆包嵌入模型",
+      "context_length": 4096,
+      "capabilities": ["embedding"]
+    }
+  },
+  "default_settings": {
+    "format": "gguf",
+    "quantization": "Q4_0",
+    "context_length": 4096,
+    "capabilities": ["text", "chat"]
+  }
+}

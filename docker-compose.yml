@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  ollama-adapter:
+    build: .
+    container_name: ollama-adapter
+    ports:
+      - "11434:11434"
+    env_file:
+      - .env
+    volumes:
+      # 挂载日志目录
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - ollama-network
+
+networks:
+  ollama-network:
+    driver: bridge
+
+# 可选：添加数据卷用于持久化
+volumes:
+  ollama-data:
+    driver: local
