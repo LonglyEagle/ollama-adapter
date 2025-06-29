@@ -44,17 +44,6 @@
       "context_length": 32768,
       "capabilities": ["text", "chat", "chinese"]
     },
-    "deepseek/deepseek-coder": {
-      "provider": "deepseek",
-      "family": "deepseek",
-      "families": ["deepseek"],
-      "parameter_size": "33B",
-      "quantization": "Q4_K_M",
-      "format": "gguf",
-      "description": "DeepSeek Coder模型",
-      "context_length": 16384,
-      "capabilities": ["text", "chat", "code", "chinese"]
-    },
     "siliconflow/Yi-34B-Chat": {
       "provider": "siliconflow",
       "family": "yi",

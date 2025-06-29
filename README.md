@@ -15,13 +15,15 @@
 ## 支持的模型提供商
 
 ### 文本生成模型
-- **阿里百炼**: qwen2:7b, qwen2:14b, qwen2:72b
-- **Deepseek**: deepseek-chat, deepseek-coder
-- **硅基流动**: yi-34b-chat, llama3-8b
-- **火山引擎**: doubao-lite, doubao-pro
+- **通义千问**: qwen2.5:7b, qwen2.5:14b, qwen2.5:72b, qwen-turbo, qwen-plus, qwen-max
+- **DeepSeek**: deepseek-chat
+- **硅基流动**: Qwen/Qwen2.5-7B-Instruct, deepseek-ai/DeepSeek-V2.5
+- **火山引擎**: doubao-pro-4k
 
 ### 嵌入模型
-- **阿里百炼**: text-embedding-v1, text-embedding-v2
+- **通义千问**: text-embedding-v1, text-embedding-v2, text-embedding-v3
+- **硅基流动**: BAAI/bge-large-zh-v1.5
+- **火山引擎**: doubao-embedding
 
 ## 快速开始
 
@@ -136,17 +138,24 @@ curl http://localhost:11434/api/tags
 | `PORT` | 服务监听端口 | `11434` |
 | `DEFAULT_MODEL` | 默认模型 | `gpt-3.5-turbo` |
 
-### 模型使用
+### 模型配置管理
 
-本适配器直接支持所有LiteLLM兼容的模型名称，无需预配置模型映射。你可以直接使用以下格式的模型名：
+本适配器使用配置文件管理支持的模型，提供统一的模型信息和参数管理：
 
-- OpenAI: `gpt-4`, `gpt-3.5-turbo`
-- Anthropic: `claude-3-opus`, `claude-3-sonnet`
-- 阿里百炼: `datascope/qwen-turbo`, `datascope/qwen-plus`
-- Deepseek: `deepseek/deepseek-chat`, `deepseek/deepseek-coder`
-- 硅基流动: `siliconflow/Yi-34B-Chat`
-- 火山引擎: `volcengine/doubao-lite-4k`
-- 其他LiteLLM支持的任何模型
+#### 配置文件位置
+- `app/config/models_config.json`: 模型配置文件
+- `app/config/model_manager.py`: 模型管理器
+
+#### 支持的模型格式
+- **通义千问**: `dashscope/qwen-turbo`, `dashscope/qwen-plus`
+- **DeepSeek**: `deepseek/deepseek-chat`, `deepseek/deepseek-coder`
+- **硅基流动**: `siliconflow/Qwen2.5-7B-Instruct`
+- **火山引擎**: `volcengine/doubao-pro-4k`
+
+#### 添加新模型
+1. 在 `models_config.json` 中添加模型配置
+2. 重启服务以加载新配置
+3. 通过 `/api/tags` 接口验证模型可用性
 
 ## 项目结构
 
@@ -169,16 +178,16 @@ ollama-adapter/
 │   │   └── error_handler.py # 异常处理服务
 │   └── config/
 │       ├── __init__.py
-│       └── settings.py      # 配置管理
+│       ├── settings.py      # 配置管理
+│       ├── models_config.json # 模型配置文件
+│       └── model_manager.py # 模型管理器
 ├── tests/
 │   └── simple_test.py       # 简单测试脚本
-├── logs/                    # 日志文件目录
 ├── requirements.txt         # Python依赖
 ├── Dockerfile              # Docker镜像构建
 ├── docker-compose.yml      # Docker Compose配置
 ├── .env.example            # 环境变量模板
-├── README.md               # 项目文档
-└── 需求文档.md             # 需求说明
+└── README.md               # 项目文档
 ```
 
 ## 开发指南
@@ -186,9 +195,23 @@ ollama-adapter/
 ### 添加新的模型提供商
 
 1. 在 `app/config/settings.py` 中添加API密钥配置
-2. 在 `model_mapping` 中添加模型映射
-3. 在 `app/services/llm_adapter.py` 中配置API密钥
-4. 测试新模型的调用
+2. 在 `app/config/models_config.json` 中添加模型配置：
+   ```json
+   {
+     "model_name": {
+       "provider": "provider_name",
+       "family": "model_family",
+       "parameter_size": "7B",
+       "quantization": "Q4_0",
+       "format": "gguf",
+       "description": "模型描述",
+       "context_length": 8192,
+       "capabilities": ["text_generation"]
+     }
+   }
+   ```
+3. 在 `.env` 中配置API密钥
+4. 重启服务并测试新模型的调用
 
 ### 自定义错误处理
 
